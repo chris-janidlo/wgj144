@@ -21,7 +21,10 @@ public class MomentumGridObject : MonoBehaviour
     public Vector3Int FuturePosition => Position + FutureVelocity;
 
     [SerializeField]
-    int _acceleration, _drag;
+    int _acceleration;
+
+    [SerializeField]
+    float _drag;
 
     public int Acceleration
     {
@@ -35,7 +38,7 @@ public class MomentumGridObject : MonoBehaviour
         }
     }
 
-    public int Drag
+    public float Drag
     {
         get => _drag;
         set
@@ -82,7 +85,7 @@ public class MomentumGridObject : MonoBehaviour
     HashSet<Vector3Int> calculateReachablePositions ()
     {
         // next position if no acceleration is applied
-        Vector3Int nextPos = Position + PastVelocity - (PastVelocity.Normalize() * PastVelocity.sqrMagnitude * Drag);
+        Vector3Int nextPos = Position + PastVelocity + getDrag(PastVelocity);
 
         HashSet<Vector3Int> accelSphere = new HashSet<Vector3Int>();
 
@@ -100,5 +103,13 @@ public class MomentumGridObject : MonoBehaviour
         }
 
         return accelSphere;
+    }
+
+    Vector3Int getDrag (Vector3Int velocity)
+    {
+        Vector3 floatVelocity = velocity;
+        Vector3 floatDrag = -floatVelocity.normalized * floatVelocity.sqrMagnitude * Drag / 2;
+
+        return Vector3Int.RoundToInt(floatDrag);
     }
 }
