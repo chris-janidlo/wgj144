@@ -25,19 +25,16 @@ public class GridOrb : MonoBehaviour
 
 	public void OnMouseDown ()
 	{
-        Debug.Log("hi");
         player.AccelerateToPosition(Position);
 	}
 
 	public void OnMouseEnter ()
 	{
-        Debug.Log("ho");
         Hovered = true;
 	}
 
 	public void OnMouseExit ()
 	{
-        Debug.Log("lets go");
         Hovered = false;
 	}
 }
