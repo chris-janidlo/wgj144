@@ -13,7 +13,7 @@ public class GridMovementControls : MonoBehaviour
 
     void Start ()
     {
-        MoveButton.onClick.AddListener(Player.Move);
+        MoveButton.onClick.AddListener(move);
         Player.ReachablePositionsChanged += respawnOrbs;
 
         respawnOrbs();
@@ -21,8 +21,15 @@ public class GridMovementControls : MonoBehaviour
 
     void Update ()
     {
-        FutureVelocityIndicator.SetPosition(0, Player.Position);
-        FutureVelocityIndicator.SetPosition(1, Player.FuturePosition);
+        FutureVelocityIndicator.SetPosition(2, Player.FuturePosition);
+    }
+
+    void move ()
+    {
+        Player.Move();
+
+        FutureVelocityIndicator.SetPosition(0, FutureVelocityIndicator.GetPosition(1));
+        FutureVelocityIndicator.SetPosition(1, FutureVelocityIndicator.GetPosition(2));
     }
 
     void respawnOrbs ()
