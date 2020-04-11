@@ -53,24 +53,6 @@ public class MomentumGridObject : MonoBehaviour
 
     public bool PositionIsReachable (Vector3Int targetPosition) => ReachablePositions().Contains(targetPosition);
 
-    // don't expect to use this, but keeping it here just in case for now
-    // public void AddAcceleration (Vector3Int acceleration)
-    // {
-    //     bool notInPositionsCheck = !PositionIsReachable(acceleration + FutureVelocity);
-    //     bool tooLongCheck = acceleration.magnitude > Acceleration;
-
-    //     Debug.Log(notInPositionsCheck == tooLongCheck);
-
-    //     if (notInPositionsCheck)
-    //     {
-    //         throw new ArgumentException($"acceleration value {acceleration} is outside of acceptable range");
-    //     }
-
-    //     FutureVelocity += acceleration;
-
-    //     reachablePosCache = null;
-    // }
-
     public void AccelerateToPosition (Vector3Int targetPosition)
     {
         if (!PositionIsReachable(targetPosition))
